@@ -1,0 +1,166 @@
+// Smart Agriculture Platform — Database Schema (Phase 3)
+// Provider: PostgreSQL (Supabase). Run `npx prisma migrate dev` locally,
+// `npx prisma migrate deploy` in production.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  FARMER
+  ADMIN
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(FARMER)
+  createdAt    DateTime  @default(now())
+
+  farms        Farm[]
+  notifications Notification[]
+  chatHistory  ChatMessage[]
+}
+
+model Farm {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  location  String
+  latitude  Float?
+  longitude Float?
+  sizeHa    Float
+  createdAt DateTime @default(now())
+
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  crops             Crop[]
+  soilReadings      SoilReading[]
+  weatherData       WeatherData[]
+  irrigationEvents  Irrigation[]
+  pestReports       PestReport[]
+  yieldPredictions  YieldPrediction[]
+  chatHistory       ChatMessage[]
+
+  @@index([userId])
+}
+
+model Crop {
+  id           String    @id @default(cuid())
+  farmId       String
+  cropType     String
+  plantingDate DateTime
+  growthStage  String    @default("planted") // planted, growing, flowering, harvest-ready, harvested
+  harvestDate  DateTime?
+  createdAt    DateTime  @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+}
+
+model SoilReading {
+  id          String   @id @default(cuid())
+  farmId      String
+  moisture    Float    // %
+  temperature Float    // C
+  ph          Float
+  nitrogen    Float    // mg/kg
+  phosphorus  Float    // mg/kg
+  potassium   Float    // mg/kg
+  source      String   @default("manual") // manual | sensor
+  recordedAt  DateTime @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId, recordedAt])
+}
+
+model WeatherData {
+  id          String   @id @default(cuid())
+  farmId      String
+  temperature Float
+  humidity    Float
+  rainfall    Float
+  forecast    String?
+  recordedAt  DateTime @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId, recordedAt])
+}
+
+model Irrigation {
+  id             String   @id @default(cuid())
+  farmId         String
+  waterUsageL    Float
+  scheduledAt    DateTime?
+  recommendation String?  // Irrigate | Wait
+  amountLPerHa   Float?
+  createdAt      DateTime @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+}
+
+model PestReport {
+  id         String   @id @default(cuid())
+  farmId     String
+  pestType   String?
+  diseaseType String?
+  severity   String   // low | medium | high
+  treatment  String?
+  reportedAt DateTime @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+}
+
+model YieldPrediction {
+  id             String   @id @default(cuid())
+  farmId         String
+  cropType       String
+  predictedYield Float    // tons/ha
+  confidence     Float    // 0-1
+  soilHealth     String   // Healthy | Medium | Poor
+  createdAt      DateTime @default(now())
+
+  farm Farm @relation(fields: [farmId], references: [id], onDelete: Cascade)
+
+  @@index([farmId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  farmId    String?
+  message   String
+  response  String
+  createdAt DateTime @default(now())
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  farm Farm? @relation(fields: [farmId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+}
