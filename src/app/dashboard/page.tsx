@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { Sprout, Leaf, Droplets, Bug, Plus, ArrowUpRight, Download } from "lucide-react";
 import AppShell from "@/components/AppShell";
+import PageBanner from "@/components/PageBanner";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -48,6 +49,12 @@ export default function DashboardPage() {
 
   return (
     <AppShell title="Dashboard" subtitle="Monitor your farms and act on AI recommendations with ease.">
+      <PageBanner
+        title="Welcome back"
+        caption="Monitor conditions, act on AI recommendations, and keep every farm connected."
+        image="/images/dashboard-hero.jpg"
+        alt="Farmer on his land with his tractor"
+      />
       <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
         <div className="flex-1 min-w-[200px]">
           {!loading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}

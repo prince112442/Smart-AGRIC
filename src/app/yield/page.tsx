@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AppShell from "@/components/AppShell";
+import PageBanner from "@/components/PageBanner";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -66,6 +67,12 @@ export default function YieldPage() {
   return (
     <AppShell title="Yield Prediction" subtitle="Estimate expected yield from soil, weather, and crop data.">
       <div className="max-w-4xl">
+        <PageBanner
+          title="Yield Prediction"
+          caption="See the full picture, roots and all, before you predict the harvest."
+          image="/images/yield-roots.jpg"
+          alt="Plant root system visible in soil"
+        />
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (

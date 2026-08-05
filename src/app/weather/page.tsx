@@ -8,6 +8,8 @@ export default function WeatherPage() {
       title="Weather Monitoring"
       subtitle="Record temperature, humidity, rainfall, and forecast notes."
       endpoint="/api/weather"
+      bannerImage="/images/weather-sprout.jpg"
+      bannerAlt="Seedling breaking through soil after rain"
       fields={[
         { key: "temperature", label: "Temperature (°C)", type: "number", step: "0.1" },
         { key: "humidity", label: "Humidity (%)", type: "number", step: "0.1" },

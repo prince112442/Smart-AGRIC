@@ -8,6 +8,8 @@ export default function PestsPage() {
       title="Pest & Disease Monitoring"
       subtitle="Report pest sightings or disease symptoms and their severity."
       endpoint="/api/pests"
+      bannerImage="/images/pests-testing.jpg"
+      bannerAlt="Soil testing and inspection tools in the field"
       fields={[
         { key: "pestType", label: "Pest type (optional)", type: "text", required: false },
         { key: "diseaseType", label: "Disease type (optional)", type: "text", required: false },

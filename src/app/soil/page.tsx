@@ -8,6 +8,8 @@ export default function SoilPage() {
       title="Soil Monitoring"
       subtitle="Log soil moisture, temperature, pH, and nutrient levels."
       endpoint="/api/soil"
+      bannerImage="/images/soil-npk.jpg"
+      bannerAlt="Soil nutrients diagram showing N, P, K, Ca, Mg, S"
       fields={[
         { key: "moisture", label: "Moisture (%)", type: "number", step: "0.1" },
         { key: "temperature", label: "Temperature (°C)", type: "number", step: "0.1" },

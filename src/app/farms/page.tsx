@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AppShell from "@/components/AppShell";
+import PageBanner from "@/components/PageBanner";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
 
@@ -38,6 +39,12 @@ export default function FarmsPage() {
   return (
     <AppShell title="My Farms" subtitle="Register and manage your farms.">
       <div className="max-w-4xl">
+        <PageBanner
+          title="My Farms"
+          caption="Every farm you register — its crops, size, and location — lives here."
+          image="/images/farms-harvest.jpg"
+          alt="Farmer carrying a harvest basket"
+        />
         <form onSubmit={handleSubmit} className="card mb-8 grid sm:grid-cols-4 gap-3 items-end">
           <div className="sm:col-span-2">
             <label className="label">Farm name</label>

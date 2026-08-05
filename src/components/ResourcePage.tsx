@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import AppShell from "./AppShell";
 import FarmPicker from "./FarmPicker";
+import PageBanner from "./PageBanner";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
 
@@ -22,12 +23,16 @@ export default function ResourcePage({
   endpoint,
   fields,
   renderItem,
+  bannerImage,
+  bannerAlt,
 }: {
   title: string;
   subtitle: string;
   endpoint: string; // e.g. "/api/soil"
   fields: Field[];
   renderItem: (item: any) => React.ReactNode;
+  bannerImage?: string;
+  bannerAlt?: string;
 }) {
   const { farms, selectedFarmId, selectFarm, loading: farmsLoading } = useFarms();
   const [items, setItems] = useState<any[]>([]);
@@ -78,6 +83,7 @@ export default function ResourcePage({
   return (
     <AppShell title={title} subtitle={subtitle}>
       <div className="max-w-4xl">
+        {bannerImage && <PageBanner title={title} caption={subtitle} image={bannerImage} alt={bannerAlt || title} />}
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (

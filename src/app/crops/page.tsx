@@ -8,6 +8,8 @@ export default function CropsPage() {
       title="Crop Management"
       subtitle="Track what's planted, its growth stage, and harvest timing."
       endpoint="/api/crops"
+      bannerImage="/images/crops-measure.jpg"
+      bannerAlt="Measuring a young crop's growth with calipers"
       fields={[
         { key: "cropType", label: "Crop type", type: "text" },
         { key: "plantingDate", label: "Planting date", type: "date" },

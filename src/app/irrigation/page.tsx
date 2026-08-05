@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Droplets, CheckCircle2 } from "lucide-react";
 import AppShell from "@/components/AppShell";
+import PageBanner from "@/components/PageBanner";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -56,6 +57,12 @@ export default function IrrigationPage() {
   return (
     <AppShell title="Irrigation" subtitle="Get an AI recommendation on whether to irrigate today.">
       <div className="max-w-4xl">
+        <PageBanner
+          title="Irrigation"
+          caption="AI recommendations for when and how much to water."
+          image="/images/irrigation-watering.jpg"
+          alt="Farmer watering crops by hand"
+        />
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (
