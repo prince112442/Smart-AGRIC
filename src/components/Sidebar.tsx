@@ -15,6 +15,7 @@ import {
   Bot,
   LogOut,
   Leaf,
+  Wheat,
 } from "lucide-react";
 import { clearSession, getUser } from "@/lib/api";
 
@@ -49,7 +50,9 @@ export default function Sidebar() {
   return (
     <aside className="hidden lg:flex w-64 shrink-0 flex-col bg-white border-r border-primary-100 h-screen sticky top-0">
       <div className="h-16 flex items-center gap-2 px-6 border-b border-primary-100">
-        <span className="text-xl">🌾</span>
+        <div className="w-8 h-8 rounded-lg bg-primary-800 text-white flex items-center justify-center">
+          <Wheat size={16} />
+        </div>
         <span className="font-bold text-primary-900 text-lg">AgriSense</span>
       </div>
 

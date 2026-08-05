@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Droplets, CheckCircle2 } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
@@ -82,8 +83,16 @@ export default function IrrigationPage() {
 
             {result && (
               <div className={`card mb-8 border-2 ${result.recommendation === "Irrigate" ? "border-amber-300 bg-amber-50" : "border-primary-300 bg-primary-50"}`}>
-                <p className="font-bold text-lg">
-                  {result.recommendation === "Irrigate" ? "💧 Irrigate today" : "✅ No need to irrigate"}
+                <p className="font-bold text-lg flex items-center gap-2">
+                  {result.recommendation === "Irrigate" ? (
+                    <>
+                      <Droplets size={20} className="text-amber-600" /> Irrigate today
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 size={20} className="text-primary-700" /> No need to irrigate
+                    </>
+                  )}
                 </p>
                 {result.recommendation === "Irrigate" && (
                   <p className="text-sm text-gray-700 mt-1">Recommended: ~{result.amountLPerHa} L/ha</p>

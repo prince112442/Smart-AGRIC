@@ -13,7 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import Link from "next/link";
-import { Sprout, Leaf, Droplets, Bug, Plus, ArrowUpRight } from "lucide-react";
+import { Sprout, Leaf, Droplets, Bug, Plus, ArrowUpRight, Download } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
@@ -48,7 +48,19 @@ export default function DashboardPage() {
 
   return (
     <AppShell title="Dashboard" subtitle="Monitor your farms and act on AI recommendations with ease.">
-      {!loading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
+      <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
+        <div className="flex-1 min-w-[200px]">
+          {!loading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
+        </div>
+        <div className="flex gap-2">
+          <Link href="/farms" className="btn-primary flex items-center gap-1.5 text-sm">
+            <Plus size={15} /> Add Farm
+          </Link>
+          <Link href="/analytics" className="btn-secondary flex items-center gap-1.5 text-sm">
+            <Download size={15} /> View Analytics
+          </Link>
+        </div>
+      </div>
 
       {farms.length === 0 ? null : (
         <>

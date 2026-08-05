@@ -1,12 +1,13 @@
 import Link from "next/link";
+import { Sprout, FlaskConical, CloudSun, Droplets, TrendingUp, Bot, Wheat } from "lucide-react";
 
 const FEATURES = [
-  { icon: "🌱", title: "Farm & Crop Management", desc: "Track every farm, its crops, and growth stages in one place." },
-  { icon: "🧪", title: "Soil Monitoring", desc: "Log moisture, pH, and N-P-K — manually today, from sensors tomorrow." },
-  { icon: "🌦️", title: "Weather Tracking", desc: "Record conditions and forecasts that feed straight into recommendations." },
-  { icon: "💧", title: "Irrigation Advice", desc: "AI recommends whether to irrigate today, and how much water to use." },
-  { icon: "📈", title: "Yield Prediction", desc: "Predicts expected yield per crop with a confidence score." },
-  { icon: "🤖", title: "AI Farm Assistant", desc: "Ask questions in plain English, answered from your farm's real data." },
+  { icon: Sprout, title: "Farm & Crop Management", desc: "Track every farm, its crops, and growth stages in one place." },
+  { icon: FlaskConical, title: "Soil Monitoring", desc: "Log moisture, pH, and N-P-K — manually today, from sensors tomorrow." },
+  { icon: CloudSun, title: "Weather Tracking", desc: "Record conditions and forecasts that feed straight into recommendations." },
+  { icon: Droplets, title: "Irrigation Advice", desc: "AI recommends whether to irrigate today, and how much water to use." },
+  { icon: TrendingUp, title: "Yield Prediction", desc: "Predicts expected yield per crop with a confidence score." },
+  { icon: Bot, title: "AI Farm Assistant", desc: "Ask questions in plain English, answered from your farm's real data." },
 ];
 
 export default function LandingPage() {
@@ -14,7 +15,12 @@ export default function LandingPage() {
     <main className="min-h-screen">
       <header className="border-b border-primary-100 bg-white">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <span className="font-bold text-primary-700 text-xl">🌾 AgriSense</span>
+          <span className="font-bold text-primary-700 text-xl flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-primary-800 text-white flex items-center justify-center">
+              <Wheat size={16} />
+            </span>
+            AgriSense
+          </span>
           <div className="flex gap-3">
             <Link href="/login" className="btn-secondary">Log in</Link>
             <Link href="/register" className="btn-primary">Get started</Link>
@@ -37,13 +43,18 @@ export default function LandingPage() {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 pb-24 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {FEATURES.map((f) => (
-          <div key={f.title} className="card">
-            <div className="text-3xl mb-2">{f.icon}</div>
-            <h3 className="font-semibold text-primary-900 mb-1">{f.title}</h3>
-            <p className="text-sm text-gray-600">{f.desc}</p>
-          </div>
-        ))}
+        {FEATURES.map((f) => {
+          const Icon = f.icon;
+          return (
+            <div key={f.title} className="card">
+              <div className="w-10 h-10 rounded-lg bg-primary-100 text-primary-700 flex items-center justify-center mb-3">
+                <Icon size={18} />
+              </div>
+              <h3 className="font-semibold text-primary-900 mb-1">{f.title}</h3>
+              <p className="text-sm text-gray-600">{f.desc}</p>
+            </div>
+          );
+        })}
       </section>
 
       <footer className="border-t border-primary-100 py-6 text-center text-sm text-gray-500">

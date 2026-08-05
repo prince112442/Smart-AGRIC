@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Wheat } from "lucide-react";
 import { apiFetch, saveSession } from "@/lib/api";
 import LeafPanel from "@/components/LeafPanel";
 
@@ -38,7 +38,9 @@ export default function RegisterPage() {
     <main className="min-h-screen flex items-center justify-center bg-[#eef1ec] p-4">
       <div className="w-full max-w-4xl bg-white rounded-3xl shadow-xl overflow-hidden grid md:grid-cols-2">
         <div className="p-8 sm:p-12 flex flex-col justify-center">
-          <span className="text-2xl mb-6">🌾</span>
+          <div className="w-9 h-9 rounded-lg bg-primary-800 text-white flex items-center justify-center mb-6">
+            <Wheat size={18} />
+          </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-1">Create your account</h1>
           <p className="text-sm text-gray-500 mb-8">Start monitoring your farm in minutes.</p>
 
