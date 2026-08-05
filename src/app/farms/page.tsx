@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import AppShell from "@/components/AppShell";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
 
@@ -36,12 +36,8 @@ export default function FarmsPage() {
   }
 
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-primary-900 mb-1">Farms</h1>
-        <p className="text-gray-500 mb-6">Register and manage your farms.</p>
-
+    <AppShell title="My Farms" subtitle="Register and manage your farms.">
+      <div className="max-w-4xl">
         <form onSubmit={handleSubmit} className="card mb-8 grid sm:grid-cols-4 gap-3 items-end">
           <div className="sm:col-span-2">
             <label className="label">Farm name</label>
@@ -86,6 +82,6 @@ export default function FarmsPage() {
           </div>
         )}
       </div>
-    </main>
+    </AppShell>
   );
 }

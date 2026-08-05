@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Navbar from "@/components/Navbar";
+import AppShell from "@/components/AppShell";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -45,12 +45,8 @@ export default function AssistantPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <Navbar />
-      <div className="max-w-3xl mx-auto px-4 py-8 w-full flex-1 flex flex-col">
-        <h1 className="text-2xl font-bold text-primary-900 mb-1">AI Farm Assistant</h1>
-        <p className="text-gray-500 mb-6">Ask questions about your farm — answers use your real stored data.</p>
-
+    <AppShell title="Farm Assistant" subtitle="Ask questions about your farm — answers use your real stored data.">
+      <div className="max-w-3xl flex flex-col">
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (
@@ -102,6 +98,6 @@ export default function AssistantPage() {
           </>
         )}
       </div>
-    </main>
+    </AppShell>
   );
 }

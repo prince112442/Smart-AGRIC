@@ -13,6 +13,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       soilReadings: { orderBy: { recordedAt: "desc" }, take: 5 },
       weatherData: { orderBy: { recordedAt: "desc" }, take: 5 },
       yieldPredictions: { orderBy: { createdAt: "desc" }, take: 5 },
+      pestReports: { orderBy: { reportedAt: "desc" }, take: 5 },
     },
   });
 

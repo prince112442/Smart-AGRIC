@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
+import AppShell from "@/components/AppShell";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -64,12 +64,8 @@ export default function YieldPage() {
   }
 
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-primary-900 mb-1">Yield Prediction</h1>
-        <p className="text-gray-500 mb-6">Estimate expected yield from soil, weather, and crop data.</p>
-
+    <AppShell title="Yield Prediction" subtitle="Estimate expected yield from soil, weather, and crop data.">
+      <div className="max-w-4xl">
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (
@@ -156,6 +152,6 @@ export default function YieldPage() {
           </>
         )}
       </div>
-    </main>
+    </AppShell>
   );
 }

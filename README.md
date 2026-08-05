@@ -141,4 +141,3 @@ src/app/api/**                Phase 4 — all REST endpoints
 src/app/**/page.tsx           Phase 5 — PWA frontend pages
 src/app/api/sensors/soil      Phase 8 — IoT-ready endpoint
 ```
-# Smart-AGRIC

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
+import AppShell from "@/components/AppShell";
 import FarmPicker from "@/components/FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -53,12 +53,8 @@ export default function IrrigationPage() {
   }
 
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-primary-900 mb-1">Irrigation</h1>
-        <p className="text-gray-500 mb-6">Get an AI recommendation on whether to irrigate today.</p>
-
+    <AppShell title="Irrigation" subtitle="Get an AI recommendation on whether to irrigate today.">
+      <div className="max-w-4xl">
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (
@@ -113,6 +109,6 @@ export default function IrrigationPage() {
           </>
         )}
       </div>
-    </main>
+    </AppShell>
   );
 }

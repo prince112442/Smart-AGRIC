@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import AppShell from "./AppShell";
 import FarmPicker from "./FarmPicker";
 import { apiFetch } from "@/lib/api";
 import { useFarms } from "@/lib/useFarm";
@@ -76,12 +76,8 @@ export default function ResourcePage({
   }
 
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-primary-900 mb-1">{title}</h1>
-        <p className="text-gray-500 mb-6">{subtitle}</p>
-
+    <AppShell title={title} subtitle={subtitle}>
+      <div className="max-w-4xl">
         {!farmsLoading && <FarmPicker farms={farms} selectedFarmId={selectedFarmId} onSelect={selectFarm} />}
 
         {selectedFarmId && (
@@ -136,6 +132,6 @@ export default function ResourcePage({
           </>
         )}
       </div>
-    </main>
+    </AppShell>
   );
 }
