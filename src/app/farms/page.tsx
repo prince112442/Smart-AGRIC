@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { History } from "lucide-react";
+import { History, Sparkles } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import PageBanner from "@/components/PageBanner";
 import { apiFetch } from "@/lib/api";
@@ -16,6 +16,7 @@ export default function FarmsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [seedingId, setSeedingId] = useState<string | null>(null);
   const [seededId, setSeededId] = useState<string | null>(null);
+  const [seedingAll, setSeedingAll] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -55,6 +56,20 @@ export default function FarmsPage() {
     }
   }
 
+  async function handleSeedAll() {
+    if (!confirm("Add 4 demo farms (Ghanaian names & regions), each pre-loaded with 30 days of data? Good for a quick demo.")) return;
+    setSeedingAll(true);
+    try {
+      await apiFetch("/api/demo/seed-ghana-farms", { method: "POST" });
+      await refresh();
+      router.push("/dashboard");
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setSeedingAll(false);
+    }
+  }
+
   return (
     <AppShell title="My Farms" subtitle="Register and manage your farms.">
       <div className="max-w-4xl">
@@ -88,9 +103,30 @@ export default function FarmsPage() {
         {loading ? (
           <p className="text-gray-500">Loading...</p>
         ) : farms.length === 0 ? (
-          <p className="text-gray-500">No farms yet — add your first one above.</p>
+          <div className="card text-center py-10">
+            <p className="text-gray-500 mb-4">No farms yet — add one above, or load a ready-made demo.</p>
+            <button
+              onClick={handleSeedAll}
+              disabled={seedingAll}
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              <Sparkles size={16} />
+              {seedingAll ? "Setting up demo farms..." : "Add 4 demo farms with 30 days of data"}
+            </button>
+          </div>
         ) : (
-          <div className="grid sm:grid-cols-2 gap-4">
+          <>
+            <div className="flex justify-end mb-3">
+              <button
+                onClick={handleSeedAll}
+                disabled={seedingAll}
+                className="btn-secondary text-sm inline-flex items-center gap-2"
+              >
+                <Sparkles size={15} />
+                {seedingAll ? "Adding demo farms..." : "Add 4 more demo farms"}
+              </button>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
             {farms.map((f) => (
               <div key={f.id} className="card">
                 <div className="flex justify-between items-start mb-3">
@@ -123,7 +159,8 @@ export default function FarmsPage() {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          </>
         )}
       </div>
     </AppShell>

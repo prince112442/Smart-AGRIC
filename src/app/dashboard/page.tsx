@@ -13,7 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import Link from "next/link";
-import { Sprout, Leaf, Droplets, Bug, Plus, ArrowUpRight, Download } from "lucide-react";
+import { Sprout, Leaf, Droplets, Bug, Plus, ArrowUpRight, Download, Sparkles } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import PageBanner from "@/components/PageBanner";
 import FarmPicker from "@/components/FarmPicker";
@@ -228,9 +228,15 @@ export default function DashboardPage() {
       {farms.length === 0 && (
         <div className="card text-center py-12">
           <p className="text-gray-500 mb-4">You don't have any farms yet.</p>
-          <Link href="/farms" className="btn-primary inline-block">
-            Add your first farm
-          </Link>
+          <div className="flex gap-3 justify-center flex-wrap">
+            <Link href="/farms" className="btn-primary inline-block">
+              Add your first farm
+            </Link>
+            <Link href="/farms" className="btn-secondary inline-flex items-center gap-2">
+              <Sparkles size={15} />
+              Or load 4 demo farms
+            </Link>
+          </div>
         </div>
       )}
     </AppShell>

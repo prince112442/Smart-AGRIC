@@ -37,9 +37,12 @@ export default function Topbar({ title, subtitle }: { title: string; subtitle?: 
   return (
     <div className="sticky top-0 z-10 bg-[#f4f6f4]/90 backdrop-blur border-b border-primary-100">
       <div className="h-16 px-4 lg:px-8 flex items-center justify-between gap-4">
-        <div className="min-w-0">
-          <h1 className="text-lg font-bold text-primary-900 truncate">{title}</h1>
-          {subtitle && <p className="text-xs text-gray-500 truncate hidden sm:block">{subtitle}</p>}
+        <div className="min-w-0 flex items-center gap-3">
+          <span className="w-1.5 h-8 rounded-full bg-amber-500 hidden sm:block" />
+          <div className="min-w-0">
+            <h1 className="text-lg font-extrabold text-amber-700 truncate">{title}</h1>
+            {subtitle && <p className="text-xs text-gray-500 truncate hidden sm:block">{subtitle}</p>}
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
